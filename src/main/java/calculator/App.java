@@ -53,14 +53,17 @@ public class App {
             System.out.println("연산 결과 : " + result);
             resultList.add(result); // 리스트에 연산 결과 저장
 
+            // exit : 종료, remove : 첫 번째 값 삭제, inquiry : 연산 결과 리스트 출력
             String action;
             while (true) {
-                System.out.println("exit : 종료, remove : 첫 번째 값 삭제");
+                System.out.println("exit : 종료, remove : 첫 번째 값 삭제, inquiry : 연산 결과 리스트 출력");
                 action = sc.nextLine();
 
                 if (action.equals("remove")) { // remove 입력 시 연산 경과 리스트 첫 번째 값 삭제
                     resultList.remove(0);
-                } else { // exit 입력 시 while문 종료
+                } else if (action.equals("inquiry")) { // inquiry 입력 시 연산 결과 리스트 출력
+                    resultList.forEach(System.out::println);
+                } else { // while문 종료
                     break;
                 }
             }
@@ -68,7 +71,5 @@ public class App {
                 break;
             }
         }
-
-        System.out.println(resultList.toString()); // 연산 결과 리스트 출력
     }
 }
