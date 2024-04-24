@@ -95,7 +95,6 @@ public class App {
                 action = sc.nextLine(); // 변수에 저장
 
                 isExit = parser.ContinueByAction(action, typeInput);
-                System.out.println(isExit);
             }
             if (action.equals("exit")) { // exit 입력 시 while문 종료
                 break;
