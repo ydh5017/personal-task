@@ -10,6 +10,7 @@ public class Parser {
     private static final String NUMBER_REG = "^[0-9]*$"; // 숫자만 허용하는 정규식
 
     Calculator calculator = new Calculator(); // 계산기 객체 생성
+    Circle circle; // Circle 객체 생성
 
     public boolean inputFirstNumber(String number) throws Exception {
         if (!Pattern.matches(NUMBER_REG, number)) { // 입력값이 숫자가 아닌 경우
@@ -41,14 +42,45 @@ public class Parser {
         return calculator.calculate(); // 연산 수행
     }
 
-    public boolean ContinueByAction(String action) {
+    public boolean ContinueByAction(String action, String type) {
         if (action.equals("remove")) {
-            calculator.deleteFirstIndex(); // List 첫 번째 요소 삭제
-        } else if (action.equals("inquiry")) {
-            calculator.showResultList(); // List 모두 출력
+            if (type.equals("operation")) {
+                calculator.deleteFirstIndex(); // List 첫 번째 요소 삭제
+            }else if (type.equals("circle")) {
+                circle.removeFirstIndex(); // List 첫 번째 요소 삭제
+            }
+        }else if (action.equals("inquiry")) {
+            if (type.equals("operation")) {
+                calculator.showResultList(); // List 모두 출력
+            }else if (type.equals("circle")) {
+                circle.showAreaList(); // List 모두 출력
+            }
         }else {
-            return false;
+            return true;
         }
+
         return true;
+    }
+
+    public boolean setCalculateType(String type) throws Exception{
+        if (type.equals("operation")) { // 타입이 사칙 연산인 경우
+            return true;
+        }else if (type.equals("circle")) { // 타입이 원 넓이 계산인 경우
+            return true;
+        } else {
+            throw new InputException("타입"); // 예외 처리
+        }
+    }
+
+    public boolean inputRadius(String radius) throws Exception{
+        if (!Pattern.matches(NUMBER_REG, radius)) { // 입력값이 정수가 아닌 경우
+            throw new InputException("정수값(반지름)"); // 예외 처리
+        }
+        circle = new Circle(Double.parseDouble(radius)); // 반지름을 생성자로 초기화한 Circle 객체 생성
+        return true;
+    }
+
+    public double getCircleArea() {
+        return circle.getArea(); // 원 넓이 계산
     }
 }
