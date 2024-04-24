@@ -1,5 +1,7 @@
 package calculator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -11,9 +13,7 @@ public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in); // 스캐너 객체 생성
         Calculator calculator = new Calculator(); // 계산기 객체 생성
-        String exit = "";
-        double[] resultArr = new double[10]; // 연산 결과들을 저장할 배열
-        int count = 0; // 연산 결과 배열의 마지막 index를 저장하는 변수
+        List<Double> resultList = new ArrayList<>(); // 연산 결과 리스트
 
         while (true) {
             // 첫 번째 숫자
@@ -51,25 +51,24 @@ public class App {
             // 연산 결과
             double result = calculator.calculate();
             System.out.println("연산 결과 : " + result);
-            if (count <= 9) {
-                resultArr[count] = result; // 연산 결과 배열에 저장
-                count++;
-            } else { // 연산 결과가 10개를 초과하는 경우 첫 결과 버리고 새로운 연산 결과 저장
-                for (int i = 0; i < resultArr.length-1; i++) {
-                    resultArr[i] = resultArr[i+1];
+            resultList.add(result); // 리스트에 연산 결과 저장
+
+            String action;
+            while (true) {
+                System.out.println("exit : 종료, remove : 첫 번째 값 삭제");
+                action = sc.nextLine();
+
+                if (action.equals("remove")) { // remove 입력 시 연산 경과 리스트 첫 번째 값 삭제
+                    resultList.remove(0);
+                } else { // exit 입력 시 while문 종료
+                    break;
                 }
-                resultArr[resultArr.length-1] = result;
             }
-
-
-            System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
-            exit = sc.nextLine();
-            if (exit.equals("exit")) { // exit 입력 시 while문 종료
+            if (action.equals("exit")) { // exit 입력 시 while문 종료
                 break;
             }
         }
-        for (int i = 0; i <= resultArr.length-1; i++) { // 연산 결과들 출력
-            System.out.println(i+1+" : "+resultArr[i]);
-        }
+
+        System.out.println(resultList.toString()); // 연산 결과 리스트 출력
     }
 }
