@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CircleCalculator extends Calculator {
-    private static double radius; // 반지름
-    private final double PI = 3.14159265358979323846;
+    private double radius; // 반지름
+    private static final double PI = 3.14159265358979323846; // 파이 값은 변하지 않기 때문에 final로 상수로 지정하고, static으로 전역 변수로 지정하여 데이터를 공유
 
     public CircleCalculator() {}
 
@@ -18,12 +18,12 @@ public class CircleCalculator extends Calculator {
         this.resultList = resultList;
     }
 
-    public static double getRadius() {
+    public double getRadius() {
         return radius;
     }
 
-    public static void setRadius(double radius) {
-        CircleCalculator.radius = radius;
+    public void setRadius(double radius) {
+        this.radius = radius;
     }
 
     @Override
