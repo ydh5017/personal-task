@@ -12,10 +12,10 @@ public class App {
         Scanner sc = new Scanner(System.in); // 스캐너 객체 생성
         Calculator calculator = new Calculator(); // 계산기 객체 생성
         String exit = "";
-        double[] results = new double[10];
-        int count = 0;
+        double[] resultArr = new double[10]; // 연산 결과들을 저장할 배열
+        int count = 0; // 연산 결과 배열의 마지막 index를 저장하는 변수
 
-        for (int i = 0; i < 10; i++) {
+        while (true) {
             // 첫 번째 숫자
             System.out.println("첫 번째 숫자를 입력해주세요."); // 첫 번째 숫자 입력 요청 메시지 출력
             String firstInput = sc.nextLine(); // 사용자가 입력한 첫 번째 숫자 변수에 저장
@@ -23,7 +23,7 @@ public class App {
                 System.out.println("잘못된 입력입니다. 정수값을 입력해주세요.");
                 firstInput = sc.nextLine();
             }
-            calculator.setFirstNumber(Integer.parseInt(firstInput));
+            calculator.setFirstNumber(Integer.parseInt(firstInput)); // 계산기 객체 firstNumber 필드 설정
 
             // 사칙 연산 기호
             System.out.println("사칙연산 기호를 입력해주세요."); // 사칙연산 기호 입력 요청 메시지 출력
@@ -32,7 +32,7 @@ public class App {
                 System.out.println("잘못된 입력입니다. 사칙 연산 기호를 입력해주세요.");
                 operator = sc.nextLine();
             }
-            calculator.setOperation(operator);
+            calculator.setOperation(operator); // 계산기 객체 operation 필드 설정
 
             // 두 번째 숫자
             System.out.println("두 번째 숫자를 입력해주세요."); // 두 번째 숫자 입력 요청 메시지 출력
@@ -46,25 +46,30 @@ public class App {
                 }
                 secondInput = sc.nextLine();
             }
-            calculator.setSecondNumber(Integer.parseInt(secondInput));
+            calculator.setSecondNumber(Integer.parseInt(secondInput)); // 계산기 객체 secondNumber 필드 설정
 
             // 연산 결과
             double result = calculator.calculate();
             System.out.println("연산 결과 : " + result);
-            results[i] = result;
-            count = i;
-
-
-            if (i < 10) {
-                System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
-                exit = sc.nextLine();
+            if (count <= 9) {
+                resultArr[count] = result; // 연산 결과 배열에 저장
+                count++;
+            } else { // 연산 결과가 10개를 초과하는 경우 첫 결과 버리고 새로운 연산 결과 저장
+                for (int i = 0; i < resultArr.length-1; i++) {
+                    resultArr[i] = resultArr[i+1];
+                }
+                resultArr[resultArr.length-1] = result;
             }
-            if (exit.equals("exit")) {
+
+
+            System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
+            exit = sc.nextLine();
+            if (exit.equals("exit")) { // exit 입력 시 while문 종료
                 break;
             }
         }
-        for (int i = 0; i <= count; i++) {
-            System.out.println(results[i]);
+        for (int i = 0; i <= resultArr.length-1; i++) { // 연산 결과들 출력
+            System.out.println(i+1+" : "+resultArr[i]);
         }
     }
 }
