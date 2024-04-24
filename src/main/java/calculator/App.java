@@ -12,8 +12,10 @@ public class App {
         Scanner sc = new Scanner(System.in); // 스캐너 객체 생성
         Calculator calculator = new Calculator(); // 계산기 객체 생성
         String exit = "";
+        double[] results = new double[10];
+        int count = 0;
 
-        while (!exit.equals("exit")) {
+        for (int i = 0; i < 10; i++) {
             // 첫 번째 숫자
             System.out.println("첫 번째 숫자를 입력해주세요."); // 첫 번째 숫자 입력 요청 메시지 출력
             String firstInput = sc.nextLine(); // 사용자가 입력한 첫 번째 숫자 변수에 저장
@@ -49,9 +51,20 @@ public class App {
             // 연산 결과
             double result = calculator.calculate();
             System.out.println("연산 결과 : " + result);
+            results[i] = result;
+            count = i;
 
-            System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
-            exit = sc.nextLine();
+
+            if (i < 10) {
+                System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
+                exit = sc.nextLine();
+            }
+            if (exit.equals("exit")) {
+                break;
+            }
+        }
+        for (int i = 0; i <= count; i++) {
+            System.out.println(results[i]);
         }
     }
 }
