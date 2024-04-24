@@ -7,6 +7,7 @@ public class Calculator {
     private int firstNumber;
     private int secondNumber;
     private String operation;
+    private List<Double> resultList = new ArrayList<>(); // 연산 결과 리스트
 
     public Calculator() {}
 
@@ -16,8 +17,6 @@ public class Calculator {
         this.operation = operation;
         this.resultList = resultList;
     }
-
-    private List<Double> resultList = new ArrayList<>(); // 연산 결과 리스트
 
     public int getFirstNumber() {
         return firstNumber;
