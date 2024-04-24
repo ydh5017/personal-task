@@ -1,4 +1,4 @@
-package calculator;
+package calculator.level1;
 
 public class Calculator {
     private int firstNumber;
