@@ -8,6 +8,15 @@ public class Calculator {
     private int secondNumber;
     private String operation;
 
+    public Calculator() {}
+
+    public Calculator(int firstNumber, int secondNumber, String operation, List<Double> resultList) {
+        this.firstNumber = firstNumber;
+        this.secondNumber = secondNumber;
+        this.operation = operation;
+        this.resultList = resultList;
+    }
+
     private List<Double> resultList = new ArrayList<>(); // 연산 결과 리스트
 
     public int getFirstNumber() {
