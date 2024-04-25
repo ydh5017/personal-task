@@ -88,7 +88,7 @@ public class App {
             String action = "";
             boolean isExit = false;
             while (!isExit) {
-                System.out.println("exit : 종료, remove : 첫 번째 값 삭제, inquiry : 연산 결과 리스트 출력"); // 다음 행동 입력 요청 메시지 출력
+                System.out.println("exit : 종료 / remove : 첫 번째 값 삭제 / inquiry : 연산 결과 리스트 출력 / 숫자 입력 : 입력 값보다 큰 연산 결과 값 출력"); // 다음 행동 입력 요청 메시지 출력
                 action = sc.nextLine(); // 변수에 저장
 
                 isExit = parser.ContinueByAction(action, typeInput);
