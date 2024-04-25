@@ -6,10 +6,10 @@ interface Operator {
 
 public enum OperatorType {
     PLUS ((x, y) -> x + y),
-    MINUS ((x, y) -> x + y),
-    MULTIPLY ((x, y) -> x + y),
-    DIVIDE ((x, y) -> x + y),
-    MOD ((x, y) -> x + y);
+    MINUS ((x, y) -> x - y),
+    MULTIPLY ((x, y) -> x * y),
+    DIVIDE ((x, y) -> x / y),
+    MOD ((x, y) -> x % y);
 
     private final Operator operator;
 
