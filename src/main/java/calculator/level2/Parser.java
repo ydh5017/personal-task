@@ -6,8 +6,10 @@ import java.util.regex.Pattern;
 
 public class Parser {
 
-    private static final String OPERATION_REG = "[+\\-*/]"; // 사칙 연산 기호 정규식
+    private static final String OPERATION_REG = "[+\\-*/%]"; // 사칙 연산 기호 정규식
     private static final String NUMBER_REG = "^[0-9]*$"; // 숫자만 허용하는 정규식
+
+    private String strOperation;
 
     ArithmeticCalculator Arithmetic = new ArithmeticCalculator(); // 계산기 객체 생성
     CircleCalculator circle = new CircleCalculator(); // Circle 객체 생성
@@ -24,6 +26,7 @@ public class Parser {
         if (!Pattern.matches(OPERATION_REG, operation)) { // 입력값이 사칙 연산 기호가 아닌 경우
             throw new InputException("사칙 연산 기호"); // 예외 처리
         }
+        this.strOperation = operation;
         Arithmetic.setOperator(operation);
         return true;
     }
@@ -31,8 +34,11 @@ public class Parser {
     public boolean inputSecondNumber(String number) throws Exception {
         if (!Pattern.matches(NUMBER_REG, number)) { // 입력값이 숫자가 아닌 경우
             throw new InputException("정수값"); // 예외 처리
-        } else if (Arithmetic.getOperator().equals("/") && number.equals("0")) { // 나눗셈 연산일 때 분모가 0일 경우
-            throw new Exception("나눗셈 연산에서 분모에 0이 입력될 수 없습니다."); // 예외 처리
+        }
+        if (number.equals("0")) { // 나눗셈 연산일 때 분모가 0일 경우
+            if (this.strOperation.equals("/") || this.strOperation.equals("%")) { // 나눗셈 연산일 때 분모가 0일 경우
+                throw new Exception("나눗셈 연산에서 분모에 0이 입력될 수 없습니다."); // 예외 처리
+            }
         }
         Arithmetic.setSecondNumber(Integer.parseInt(number)); // 계산기 객체 secondNumber 필드 설정
         return true;
