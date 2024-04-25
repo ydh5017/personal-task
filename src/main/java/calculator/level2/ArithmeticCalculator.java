@@ -1,9 +1,12 @@
 package calculator.level2;
 
-public class ArithmeticCalculator extends Calculator {
+import calculator.level2.operator.*;
+
+public class ArithmeticCalculator extends Calculator { // 사칙 연산
     private int firstNumber;
     private int secondNumber;
-    private String operation;
+    private Operator operator;
+
 
     public int getFirstNumber() {
         return firstNumber;
@@ -21,23 +24,24 @@ public class ArithmeticCalculator extends Calculator {
         this.secondNumber = secondNumber;
     }
 
-    public String getOperation() {
-        return operation;
+    public Operator getOperator() {
+        return operator;
     }
 
-    public void setOperation(String operation) {
-        this.operation = operation;
+    public void setOperator(String operation) {
+        switch (operation) {
+            case "+": this.operator = new AddOperator(); break;
+            case "-": this.operator = new SubtractOperator(); break;
+            case "*": this.operator = new MultiplyOperator(); break;
+            case "/": this.operator = new DivideOperator(); break;
+        }
     }
 
     @Override
-    public double calculate() {
+    public double calculate() { // 계산 수행
         double result = 0;
-        switch (operation) {
-            case "+": result = firstNumber + secondNumber; break;
-            case "-": result = firstNumber - secondNumber; break;
-            case "*": result = firstNumber * secondNumber; break;
-            case "/": result = firstNumber / secondNumber; break;
-        }
+        // Operator 추상 클래스의 operator 추상 메서드를 구현한 구현체로 숫자들을 넘겨 계산 후 double 값 리턴
+        result = this.operator.operate(this.firstNumber, this.secondNumber);
         resultList.add(result);
         return result;
     }
