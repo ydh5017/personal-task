@@ -11,14 +11,14 @@ public class Parser {
 
     private String strOperation;
 
-    ArithmeticCalculator<Double> Arithmetic = new ArithmeticCalculator<>(); // 계산기 객체 생성
+    ArithmeticCalculator<Double> arithmetic = new ArithmeticCalculator<>(); // 계산기 객체 생성
     CircleCalculator circle = new CircleCalculator(); // Circle 객체 생성
 
     public boolean inputFirstNumber(String number) throws Exception {
         if (!Pattern.matches(NUMBER_REG, number)) { // 입력값이 숫자가 아닌 경우
             throw new InputException("숫자"); // 예외 처리
         }
-        Arithmetic.setFirstNumber(Double.valueOf(number)); // 계산기 객체 firstNumber 필드 설정
+        arithmetic.setFirstNumber(Double.valueOf(number)); // 계산기 객체 firstNumber 필드 설정
         return true;
     }
 
@@ -27,7 +27,7 @@ public class Parser {
             throw new InputException("사칙 연산 기호"); // 예외 처리
         }
         this.strOperation = operation;
-        Arithmetic.setOperator(operation);
+        arithmetic.setOperator(operation);
         return true;
     }
 
@@ -40,27 +40,29 @@ public class Parser {
                 throw new Exception("나눗셈 연산에서 분모에 0이 입력될 수 없습니다."); // 예외 처리
             }
         }
-        Arithmetic.setSecondNumber(Double.valueOf(number)); // 계산기 객체 secondNumber 필드 설정
+        arithmetic.setSecondNumber(Double.valueOf(number)); // 계산기 객체 secondNumber 필드 설정
         return true;
     }
 
     public double executeCalculator() {
-        return Arithmetic.calculate(); // 연산 수행
+        return arithmetic.calculate(); // 연산 수행
     }
 
     public boolean ContinueByAction(String action, String type) {
         if (action.equals("remove")) {
             if (type.equals("operation")) {
-                Arithmetic.removeFirstIndex(); // List 첫 번째 요소 삭제
+                arithmetic.removeFirstIndex(); // List 첫 번째 요소 삭제
             }else if (type.equals("circle")) {
                 circle.removeFirstIndex(); // List 첫 번째 요소 삭제
             }
         }else if (action.equals("inquiry")) {
             if (type.equals("operation")) {
-                Arithmetic.showResultList(); // List 모두 출력
+                arithmetic.showResultList(); // List 모두 출력
             }else if (type.equals("circle")) {
                 circle.showResultList(); // List 모두 출력
             }
+        }else if (Pattern.matches(NUMBER_REG, action)) {
+            arithmetic.showListWithEnteredNumber(action);
         }else {
             return true;
         }
