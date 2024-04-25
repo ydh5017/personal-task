@@ -34,6 +34,7 @@ public class ArithmeticCalculator extends Calculator { // 사칙 연산
             case "-": this.operator = new SubtractOperator(); break;
             case "*": this.operator = new MultiplyOperator(); break;
             case "/": this.operator = new DivideOperator(); break;
+            case "%": this.operator = new ModOperator(); break;
         }
     }
 
