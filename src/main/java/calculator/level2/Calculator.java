@@ -14,11 +14,11 @@ public abstract class Calculator {
 
     public abstract double calculate();
 
-    public void removeFirstIndex() {
+    public void removeFirstIndex() { // 리스트의 첫 번째 인덱스 삭제
         resultList.remove(0);
     }
 
-    public void showResultList() {
+    public void showResultList() { // 리스트 모두 출력
         resultList.forEach(System.out::println);
     }
 }
