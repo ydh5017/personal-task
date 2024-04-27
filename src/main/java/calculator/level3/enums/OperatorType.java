@@ -1,4 +1,4 @@
-package calculator.level3;
+package calculator.level3.enums;
 
 interface Operator {
     double calculate(double a, double b);
