@@ -1,4 +1,4 @@
-package calculator.level3.operator;
+package calculator.level3.operators;
 
 public class MultiplyOperator extends Operator {
     @Override

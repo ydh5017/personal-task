@@ -52,17 +52,22 @@ public class Parser {
         if (action.equals("remove")) {
             if (type.equals("operation")) {
                 arithmetic.removeFirstIndex(); // List 첫 번째 요소 삭제
+                return false;
             }else if (type.equals("circle")) {
                 circle.removeFirstIndex(); // List 첫 번째 요소 삭제
+                return false;
             }
         }else if (action.equals("inquiry")) {
             if (type.equals("operation")) {
                 arithmetic.showResultList(); // List 모두 출력
+                return false;
             }else if (type.equals("circle")) {
                 circle.showResultList(); // List 모두 출력
+                return false;
             }
         }else if (Pattern.matches(NUMBER_REG, action)) {
             arithmetic.showListWithEnteredNumber(action);
+            return false;
         }else {
             return true;
         }

@@ -1,7 +1,6 @@
 package calculator.level2;
 
-import calculator.level2.operator.*;
-import calculator.level3.OperatorType;
+import calculator.level3.enums.OperatorType;
 
 public class ArithmeticCalculator extends Calculator { // 사칙 연산
     private int firstNumber;
