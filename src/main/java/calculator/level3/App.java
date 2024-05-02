@@ -15,7 +15,7 @@ public class App {
             String typeInput = toTypeInput(parser);
 
             // 원 넓이 계산
-            if (typeInput.equals("circle")) {
+            if ("circle".equals(typeInput)) {
                 circle(parser);
             }else {
                 arithmetic(parser);
@@ -59,42 +59,26 @@ public class App {
     }
 
     private static void arithmetic(Parser parser) {
-        // 첫 번째 숫자
-        boolean first = false;
-        while (!first) {
+        boolean isValid = false;
+        while (!isValid) {
             try {
+                // 첫 번째 숫자
                 System.out.println("첫 번째 숫자를 입력해주세요."); // 첫 번째 숫자 입력 요청 메시지 출력
-                String firstInput = sc.nextLine(); // 사용자가 입력한 첫 번째 숫자 변수에 저장
-                first = parser.inputFirstNumber(firstInput); // Parser 객체의 inputFirstNumber 메소드를 통해 첫 번째 숫자 파싱 후 true 반환
-            }catch (Exception e) {
-                System.out.println(e.getMessage()); // 예외 메시지 출력
-            }
-        }
+                parser.inputFirstNumber(sc.nextLine()); // Parser 객체의 inputFirstNumber 메소드를 통해 첫 번째 숫자 파싱 후 true 반환
 
-        // 사칙 연산 기호
-        boolean operation = false;
-        while (!operation) {
-            try {
+                // 사칙 연산 기호
                 System.out.println("사칙연산 기호를 입력해주세요."); // 사칙연산 기호 입력 요청 메시지 출력
-                String operator = sc.nextLine(); // 사용자가 입력한 사칙연산 기호 문자열을 변수에 저장
-                operation = parser.inputOperation(operator); // Parser 객체의 inputOperation 메소드를 통해 연산 기호 파싱 후 true 반환
-            }catch (Exception e) {
-                System.out.println(e.getMessage()); // 예외 메시지 출력
-            }
-        }
+                parser.inputOperation(sc.nextLine()); // Parser 객체의 inputOperation 메소드를 통해 연산 기호 파싱 후 true 반환
 
-        // 두 번째 숫자
-        boolean second = false;
-        while (!second) {
-            try {
+                // 두 번째 숫자
                 System.out.println("두 번째 숫자를 입력해주세요."); // 두 번째 숫자 입력 요청 메시지 출력
-                String secondInput = sc.nextLine(); // 사용자가 입력한 두 번째 숫자 변수에 저장
-                second = parser.inputSecondNumber(secondInput); // Parser 객체의 inputFirstNumber 메소드를 통해 두 번째 숫자 파싱 후 true 반환
+                parser.inputSecondNumber(sc.nextLine()); // Parser 객체의 inputFirstNumber 메소드를 통해 두 번째 숫자 파싱 후 true 반환
+
+                isValid = true;
             }catch (Exception e) {
                 System.out.println(e.getMessage()); // 예외 메시지 출력
             }
         }
-
         // 연산 결과
         double result = parser.executeCalculator();
         System.out.println("연산 결과 : " + result);
@@ -110,7 +94,7 @@ public class App {
 
             isExit = parser.ContinueByAction(action, typeInput);
         }
-        if (action.equals("exit")) { // exit 입력 시 false 반환 그 외에는 true 반환
+        if ("exit".equals(action)) { // exit 입력 시 false 반환 그 외에는 true 반환
             return false;
         }
         return true;

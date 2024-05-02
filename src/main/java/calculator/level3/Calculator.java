@@ -3,7 +3,7 @@ package calculator.level3;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Calculator<T> {
+public abstract class Calculator<T extends Number> {
     List<T> resultList = new ArrayList<>(); // 연산 결과 리스트
 
     public Calculator() {}
